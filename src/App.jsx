@@ -7,12 +7,12 @@ import ShopPage from "./pages/shop/shoppage.component";
 import SignInAndSignUpPage from "./pages/sing-in-and-sing-up/sing-in-and-sing-up.component";
 import Header from "./components/header/header.component";
 
-// * Authentication
+// * AuthenticationPЗ
 import { auth } from "./firebase/firebase.utils";
 
 const App = () => {
   // * Initial state for the user
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState();
 
   useEffect(() => {
     let unsubscribeFromAuth = null;
@@ -20,12 +20,12 @@ const App = () => {
       setCurrentUser(user);
       unsubscribeFromAuth();
     });
-  });
+  }, [currentUser]);
   console.log(`User is:`, currentUser);
 
   return (
     <div>
-      <Header />
+      <Header currentUser={currentUser} />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />
