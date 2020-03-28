@@ -8,30 +8,40 @@ import SignInAndSignUpPage from "./pages/sing-in-and-sing-up/sing-in-and-sing-up
 import Header from "./components/header/header.component";
 
 // * AuthenticationPЗ
-import { auth } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 const App = () => {
   // * Initial state for the user
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    let unsubscribeFromAuth = null;
-    unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      setCurrentUser(user);
-      unsubscribeFromAuth();
+    const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      // * Create the user in the database
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot(snapShot => {
+          setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data()
+          });
+        });
+      }
+      setCurrentUser(userAuth);
     });
-  }, [currentUser]);
-  console.log(`User is:`, currentUser);
+
+    return () => unsubscribeFromAuth();
+  }, []);
 
   return (
-    <div>
+    <>
       <Header currentUser={currentUser} />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />
         <Route path="/signin" component={SignInAndSignUpPage} />
       </Switch>
-    </div>
+    </>
   );
 };
 
