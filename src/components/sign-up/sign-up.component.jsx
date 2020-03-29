@@ -24,8 +24,7 @@ const SignUp = () => {
 
     if (password !== confirmPassword) {
       alert(`passwords don't match`);
-      console.log(`Password:`, password);
-      console.log(`Confirm Password: `, confirmPassword);
+
       return;
     }
 
@@ -50,8 +49,6 @@ const SignUp = () => {
   const handleChange = event => {
     const { name, value } = event.target;
 
-    console.log(name);
-    console.log(value);
     setNewUser({
       ...newUser,
       [name]: value
