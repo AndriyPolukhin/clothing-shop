@@ -26,12 +26,15 @@ const App = () => {
             ...snapShot.data()
           });
         });
+      } else {
+        setCurrentUser(userAuth);
       }
-      setCurrentUser(userAuth);
     });
 
     return () => unsubscribeFromAuth();
   }, []);
+
+  console.log(currentUser);
 
   return (
     <>
