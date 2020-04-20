@@ -12,10 +12,10 @@ const config = {
   storageBucket: "crown-db-e3284.appspot.com",
   messagingSenderId: "701768614261",
   appId: "1:701768614261:web:f7d138cd74f95468f2933c",
-  measurementId: "G-2LKQY0XJC5"
+  measurementId: "G-2LKQY0XJC5",
 };
 
-// * @fn to creta the user profile
+// * @fn to create the user profile
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
@@ -32,7 +32,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         displayName,
         email,
         createdAt,
-        ...additionalData
+        ...additionalData,
       });
     } catch (error) {
       console.log(`error creating user`, error.message);
@@ -52,7 +52,7 @@ export const firestore = firebase.firestore();
 const provider = new firebase.auth.GoogleAuthProvider();
 // * Set custom @params
 provider.setCustomParameters({
-  prompt: "select_account"
+  prompt: "select_account",
 });
 
 // * Export the sign in method

@@ -12,22 +12,22 @@ import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 const App = () => {
   // * Initial state for the user
-  const [currentUser, setCurrentUser] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+    const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       // * Create the user in the database
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
-        userRef.onSnapshot(snapShot => {
-          setCurrentUser({
+        userRef.onSnapshot((snapShot) => {
+          setUser({
             id: snapShot.id,
-            ...snapShot.data()
+            ...snapShot.data(),
           });
         });
       } else {
-        setCurrentUser(userAuth);
+        setUser(userAuth);
       }
     });
 
@@ -36,7 +36,7 @@ const App = () => {
 
   return (
     <>
-      <Header currentUser={currentUser} />
+      <Header user={user} />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />
