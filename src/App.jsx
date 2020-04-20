@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
+
+import { useDispatch } from "react-redux";
 
 import "./App.css";
 import HomePage from "./pages/homepage/homepage.component";
@@ -9,11 +11,11 @@ import Header from "./components/header/header.component";
 
 // * AuthenticationPЗ
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+// * Redux
+import { setCurrentUser } from "./redux/user/user.actions";
 
 const App = () => {
-  // * Initial state for the user
-  const [user, setUser] = useState(null);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       // * Create the user in the database
@@ -21,22 +23,24 @@ const App = () => {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot((snapShot) => {
-          setUser({
-            id: snapShot.id,
-            ...snapShot.data(),
-          });
+          dispatch(
+            setCurrentUser({
+              id: snapShot.id,
+              ...snapShot.data(),
+            })
+          );
         });
       } else {
-        setUser(userAuth);
+        dispatch(setCurrentUser(userAuth));
       }
     });
 
     return () => unsubscribeFromAuth();
-  }, []);
+  });
 
   return (
     <>
-      <Header user={user} />
+      <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />
