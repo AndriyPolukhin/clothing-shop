@@ -1,15 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, shallowEqual } from "react-redux";
 import { auth } from "../../firebase/firebase.utils";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import "./header.styles.scss";
 
 const Header = () => {
-  const { currentUser } = useSelector((state) => ({
-    currentUser: state.user.currentUser,
-  }));
+  const currentUser = useSelector(
+    (state) => state.user.currentUser,
+    shallowEqual
+  );
   return (
     <div className="header">
       <Link to="/" className="logo-container">
