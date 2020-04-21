@@ -10,12 +10,14 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 import "./header.styles.scss";
 
 const Header = () => {
-  const currentUser = useSelector(
-    (state) => state.user.currentUser,
+  // * State Variables
+  const { currentUser, hidden } = useSelector(
+    (state) => ({
+      currentUser: state.user.currentUser,
+      hidden: state.cart.hidden,
+    }),
     shallowEqual
   );
-
-  const hidden = useSelector((state) => state.cart.hidden, shallowEqual);
 
   return (
     <div className="header">
