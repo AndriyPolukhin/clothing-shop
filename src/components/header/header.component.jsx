@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { useSelector, shallowEqual } from "react-redux";
 import { auth } from "../../firebase/firebase.utils";
 
+import CartIcon from "../cart-icon/cart-icon.component";
+import CartDropdown from "../cart-dropdown/cart-dropdown.component";
+
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import "./header.styles.scss";
 
@@ -11,6 +14,9 @@ const Header = () => {
     (state) => state.user.currentUser,
     shallowEqual
   );
+
+  const hidden = useSelector((state) => state.cart.hidden, shallowEqual);
+
   return (
     <div className="header">
       <Link to="/" className="logo-container">
@@ -18,7 +24,7 @@ const Header = () => {
       </Link>
       <div className="options">
         <Link className="option" to="/shop">
-          SHOP8
+          SHOP
         </Link>
         <Link className="option" to="/contact">
           CONTACT
@@ -32,7 +38,11 @@ const Header = () => {
             SIGN IN
           </Link>
         )}
+        <Link className="option" to="/cart">
+          <CartIcon />
+        </Link>
       </div>
+      {hidden ? null : <CartDropdown />}
     </div>
   );
 };
