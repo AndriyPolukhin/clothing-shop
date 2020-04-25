@@ -1,18 +1,17 @@
 // * Dependencies
-import React from "react";
-import { useSelector, shallowEqual, useDispatch } from "react-redux";
-import { withRouter } from "react-router-dom";
+import React from 'react';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 // * Components
-import CustomButton from "../custom-button/custom-button.component";
-import CartItem from "../cart-item/cart-item.component";
-import { selectCartItems } from "../../redux/cart/cart.selectors";
-import { toggleCartHidden } from "../../redux/cart/cart.actions";
+import CustomButton from '../custom-button/custom-button.component';
+import CartItem from '../cart-item/cart-item.component';
+import { selectCartItems } from '../../redux/cart/cart.selectors';
+import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
-import "./cart-dropdown.styles.scss";
+import './cart-dropdown.styles.scss';
 
-const CartDropdown = ({ history, ...otherProps }) => {
-  console.log(otherProps);
+const CartDropdown = ({ history }) => {
   const state = useSelector((state) => state, shallowEqual);
   const cartItems = selectCartItems(state);
   const dispatch = useDispatch();
@@ -30,7 +29,7 @@ const CartDropdown = ({ history, ...otherProps }) => {
       </div>
       <CustomButton
         onClick={() => {
-          history.push("/checkout");
+          history.push('/checkout');
           dispatch(toggleCartHidden());
         }}
       >
