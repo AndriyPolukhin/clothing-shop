@@ -1,7 +1,7 @@
 // * Dependencies
 import React from "react";
 import { useSelector, shallowEqual } from "react-redux";
-
+import { selectCartItems } from "../../redux/cart/cart.selectors";
 // * Components
 import CustomButton from "../custom-button/custom-button.component";
 import CartItem from "../cart-item/cart-item.component";
@@ -9,12 +9,8 @@ import CartItem from "../cart-item/cart-item.component";
 import "./cart-dropdown.styles.scss";
 
 const CartDropdown = () => {
-  const { cartItems } = useSelector(
-    (state) => ({
-      cartItems: state.cart.cartItems,
-    }),
-    shallowEqual
-  );
+  const state = useSelector((state) => state, shallowEqual);
+  const cartItems = selectCartItems(state);
 
   return (
     <div className="cart-dropdown">
