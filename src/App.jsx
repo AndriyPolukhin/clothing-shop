@@ -1,21 +1,21 @@
-import React, { useEffect } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 // import { createStructuredSelector } from "reselect";
 
-import "./App.css";
+import './App.css';
 
-import HomePage from "./pages/homepage/homepage.component";
-import ShopPage from "./pages/shop/shoppage.component";
-import SignInAndSignUpPage from "./pages/sing-in-and-sing-up/sing-in-and-sing-up.component";
-import CheckoutPage from "./pages/checkout/checkout.component";
+import HomePage from './pages/homepage/homepage.component';
+import ShopPage from './pages/shop/shop.component';
+import SignInAndSignUpPage from './pages/sing-in-and-sing-up/sing-in-and-sing-up.component';
+import CheckoutPage from './pages/checkout/checkout.component';
 
-import Header from "./components/header/header.component";
+import Header from './components/header/header.component';
 // * AuthenticationPЗ
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 // * Redux
-import { setCurrentUser } from "./redux/user/user.actions";
+import { setCurrentUser } from './redux/user/user.actions';
 // import { selectCurrentUser } from "./redux/user/user.selectors";
 
 const App = () => {
