@@ -19,3 +19,24 @@ export const ImageContainer = styled.div`
     height: 100%;
   }
 `;
+
+export const TextContainer = styled.span`
+  width: 23%;
+`;
+
+export const QuantityContainer = styled(TextContainer)`
+  display: flex;
+
+  span {
+    margin: 0 10px;
+  }
+
+  div {
+    cursor: pointer;
+  }
+`;
+
+export const RemoveButton = styled.div`
+  padding-left: 12px;
+  cursor: pointer;
+`;

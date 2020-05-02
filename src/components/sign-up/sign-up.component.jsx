@@ -1,23 +1,23 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import FormInput from "../form-input/form-input.component";
-import CustomButton from "../custom-button/custom-button.component";
+import FormInput from '../form-input/form-input.component';
+import CustomButton from '../custom-button/custom-button.component';
 
-import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
+import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
-import "./sign-up.styles.scss";
+import { SignUpContainer, SignUpTitle } from './sign-up.styles';
 
 const SignUp = () => {
   const [newUser, setNewUser] = useState({
-    displayName: "",
-    email: "",
-    password: "",
-    confirmPassword: ""
+    displayName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
 
   const { displayName, email, password, confirmPassword } = newUser;
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const { displayName, email, password, confirmPassword } = newUser;
@@ -37,27 +37,27 @@ const SignUp = () => {
       await createUserProfileDocument(user, { displayName });
 
       setNewUser({
-        displayName: "",
-        email: "",
-        password: "",
-        confirmPassword: ""
+        displayName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
       });
     } catch (error) {
       console.error(error);
     }
   };
-  const handleChange = event => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
 
     setNewUser({
       ...newUser,
-      [name]: value
+      [name]: value,
     });
   };
 
   return (
-    <div className="sign-up">
-      <h2 className="title">I do not have an account</h2>
+    <SignUpContainer>
+      <SignUpTitle>I do not have an account</SignUpTitle>
       <span>Sign up with your email and password</span>
       <form className="sign-up-form" onSubmit={handleSubmit}>
         <FormInput
@@ -94,7 +94,7 @@ const SignUp = () => {
         />
         <CustomButton type="submit"> SIGN UP </CustomButton>
       </form>
-    </div>
+    </SignUpContainer>
   );
 };
 
