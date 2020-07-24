@@ -13,14 +13,14 @@ const config = {
   storageBucket: "crown-db-e3284.appspot.com",
   messagingSenderId: "701768614261",
   appId: "1:701768614261:web:f7d138cd74f95468f2933c",
-  measurementId: "G-2LKQY0XJC5"
+  measurementId: "G-2LKQY0XJC5",
 };
 firebase.initializeApp(config);
 
 const authContext = createContext();
 
 // * Provider component that wraps your app and makes auth object...
-// * available to any child component taht calls useAuth().
+// * available to any child component that calls useAuth().
 
 export const ProvideAuth = ({ children }) => {
   const auth = useProvideAuth();
@@ -44,7 +44,7 @@ const useProvideAuth = () => {
     return firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(response => {
+      .then((response) => {
         setUser(response.user);
         return response.user;
       });
@@ -54,7 +54,7 @@ const useProvideAuth = () => {
     return firebase
       .auth()
       .createUserWIthEmailAndPassword(email, password)
-      .then(response => {
+      .then((response) => {
         setUser(response.user);
         return response.user;
       });
@@ -69,7 +69,7 @@ const useProvideAuth = () => {
       });
   };
 
-  const sendPasswordResetEmail = email => {
+  const sendPasswordResetEmail = (email) => {
     return firebase
       .auth()
       .sendPasswordResetEmail(email)
@@ -92,7 +92,7 @@ const useProvideAuth = () => {
   // * component that utilizes this hook to re-render with the ...
   // * latest auth object.
   useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
       } else {
@@ -111,6 +111,6 @@ const useProvideAuth = () => {
     signup,
     signout,
     sendPasswordResetEmail,
-    confirmPasswordReset
+    confirmPasswordReset,
   };
 };
