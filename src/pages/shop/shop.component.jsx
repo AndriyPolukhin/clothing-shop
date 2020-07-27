@@ -4,7 +4,9 @@ import { Route } from 'react-router-dom';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import CollectionsOverview from '../../components/collections-overview/collections-overview.component';
+import CollectionsOverviewContainer from '../../components/collections-overview/collections-overview.container';
 import CollectionPage from '../collection/collection.component';
+import CollectionPageContainer from '../collection/collection.container';
 
 import WithSpinner from '../../components/with-spinner/with-spinner.component';
 
@@ -37,21 +39,23 @@ const ShopPage = ({ match }) => {
       <Route
         exact
         path={`${match.path}`}
-        render={(otherProps) => (
-          <CollectionsOverviewWithSpinner
-            isLoading={isCollectionFetching}
-            {...otherProps}
-          />
-        )}
+        // render={(otherProps) => (
+        //   <CollectionsOverviewWithSpinner
+        //     isLoading={isCollectionFetching}
+        //     {...otherProps}
+        //   />
+        // )}
+        component={CollectionsOverviewContainer}
       />
       <Route
         path={`${match.path}/:collectionId`}
-        render={(otherProps) => (
-          <CollectionPageWithSpinner
-            isLoading={!isCollectionsLoaded}
-            {...otherProps}
-          />
-        )}
+        // render={(otherProps) => (
+        //   <CollectionPageWithSpinner
+        //     isLoading={!isCollectionsLoaded}
+        //     {...otherProps}
+        //   />
+        // )}
+        component={CollectionPageContainer}
       />
     </div>
   );
