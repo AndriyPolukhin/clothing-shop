@@ -1,26 +1,37 @@
-import React, { useEffect } from "react";
-import { Route } from "react-router-dom";
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import CollectionsOverview from "../../components/collections-overview/collections-overview.component";
-import CollectionPage from "../collection/collection.component";
+import React, { useEffect } from 'react';
+import { Route } from 'react-router-dom';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import CollectionsOverview from '../../components/collections-overview/collections-overview.component';
+import CollectionPage from '../collection/collection.component';
 
 import {
   firestore,
   convertCollectionsSnapshotToMap,
-} from "../../firebase/firebase.utils";
+} from '../../firebase/firebase.utils';
 
-import "./shop.styles.scss";
+import { updateCollections } from '../../redux/shop/shop.actions';
+import { selectCollection } from '../../redux/shop/shop.selectors';
+
+import './shop.styles.scss';
 
 const ShopPage = ({ match }) => {
-  useEffect(() => {
-    const unsubscribeFromSnapshot = null;
-    const collectionRef = firestore.collection("collections");
+  const collection = useSelector(
+    (state) => selectCollection(state),
+    shallowEqual
+  );
 
-    collectionRef.onSnapshot(async (snapshot) => {
-      // console.log(snapshot);
-      convertCollectionsSnapshotToMap(snapshot);
-    });
-  }, []);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const unsubscribeFromSnapshot = () => {
+      const collectionRef = firestore.collection('collections');
+
+      collectionRef.onSnapshot(async (snapshot) => {
+        const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
+        dispatch(updateCollections(collectionsMap));
+      });
+    };
+    return () => unsubscribeFromSnapshot();
+  }, [dispatch]);
 
   return (
     <div className="shop-page">
