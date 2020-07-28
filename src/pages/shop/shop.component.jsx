@@ -11,7 +11,7 @@ import CollectionPageContainer from '../collection/collection.container';
 
 // import WithSpinner from '../../components/with-spinner/with-spinner.component';
 
-import { fetchCollectionsStartAsync } from '../../redux/shop/shop.actions';
+import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
 // import {
 //   selectIsCollectionFetching,
 //   selectIsCollectionsLoaded,
@@ -33,7 +33,7 @@ const ShopPage = ({ match }) => {
   // })(state);
 
   const dispatch = useDispatch();
-  useEffect(() => dispatch(fetchCollectionsStartAsync()), [dispatch]);
+  useEffect(() => dispatch(fetchCollectionsStart()), [dispatch]);
 
   return (
     <div className="shop-page">

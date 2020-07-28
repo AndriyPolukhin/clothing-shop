@@ -45,25 +45,26 @@ const App = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      // * Create the user in the database
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
+    // const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+    //   // * Create the user in the database
+    //   if (userAuth) {
+    //     const userRef = await createUserProfileDocument(userAuth);
 
-        userRef.onSnapshot((snapShot) =>
-          dispatch(
-            setCurrentUser({
-              id: snapShot.id,
-              ...snapShot.data(),
-            })
-          )
-        );
-      } else {
-        dispatch(setCurrentUser(userAuth));
-      }
-    });
+    //     userRef.onSnapshot((snapShot) =>
+    //       dispatch(
+    //         setCurrentUser({
+    //           id: snapShot.id,
+    //           ...snapShot.data(),
+    //         })
+    //       )
+    //     );
+    //   } else {
+    //     dispatch(setCurrentUser(userAuth));
+    //   }
+    // });
 
-    return () => unsubscribeFromAuth();
+    // return () => unsubscribeFromAuth();
+
   });
 
   return (
