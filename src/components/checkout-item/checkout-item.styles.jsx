@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ChecktoutItemContainer = styled.div`
+export const CheckoutItemContainer = styled.div`
   width: 100%;
   display: flex;
   min-height: 100px;
@@ -36,7 +36,7 @@ export const QuantityContainer = styled(TextContainer)`
   }
 `;
 
-export const RemoveButton = styled.div`
+export const RemoveButtonContainer = styled.div`
   padding-left: 12px;
   cursor: pointer;
 `;

@@ -20,7 +20,7 @@ export const GroupContainer = styled.div`
 
 export const FormInputContainer = styled.input`
   background: none;
-  background-color: #fff;
+  background-color: white;
   color: ${subColor};
   font-size: 18px;
   padding: 10px 10px 10px 5px;
@@ -35,7 +35,7 @@ export const FormInputContainer = styled.input`
     outline: none;
   }
 
-  &:focus ~ .form-input-label {
+  &:focus ~ label {
     ${shrinkLabelStyles}
   }
 `;

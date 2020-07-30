@@ -23,7 +23,7 @@ export const CheckoutHeaderContainer = styled.div`
 `;
 
 export const HeaderBlockContainer = styled.div`
-  text-transform: capitalized;
+  text-transform: capitalize;
   width: 23%;
 
   &:last-child {
@@ -38,8 +38,8 @@ export const TotalContainer = styled.div`
 `;
 
 export const WarningContainer = styled.div`
-  color: red;
-  font-size: 24px;
-  margin-top: 40px;
   text-align: center;
+  margin-top: 40px;
+  font-size: 24px;
+  color: red;
 `;

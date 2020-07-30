@@ -1,41 +1,37 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
-import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
-
-// import './sign-in.styles.scss';
+import {
+  googleSignInStart,
+  emailSignInStart,
+} from '../../redux/user/user.actions';
 
 import {
   SignInContainer,
-  ButtonsBarContainer,
   SignInTitle,
+  ButtonsBarContainer,
 } from './sign-in.styles';
 
-const SignIn = () => {
-  const [userData, setUserData] = useState({
+const SignIn = ({ emailSignInStart, googleSignInStart }) => {
+  const [userCredentials, setCredentials] = useState({
     email: '',
     password: '',
   });
 
-  const handleChange = (event) => {
-    event.preventDefault();
-    const { value, name } = event.target;
-    setUserData({ ...userData, [name]: value });
-  };
-
+  const { email, password } = userCredentials;
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const { email, password } = userData;
+    emailSignInStart(email, password);
+  };
 
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-      setUserData({ email: '', password: '' });
-    } catch (error) {
-      console.error(error);
-    }
+  const handleChange = (event) => {
+    const { value, name } = event.target;
+
+    setCredentials({ ...userCredentials, [name]: value });
   };
 
   return (
@@ -45,26 +41,29 @@ const SignIn = () => {
 
       <form onSubmit={handleSubmit}>
         <FormInput
-          type="email"
           name="email"
-          label="email"
-          value={userData.email}
+          type="email"
           handleChange={handleChange}
+          value={email}
+          label="email"
           required
         />
         <FormInput
-          type="password"
           name="password"
-          label="password"
+          type="password"
+          value={password}
           handleChange={handleChange}
-          value={userData.password}
+          label="password"
           required
         />
-
         <ButtonsBarContainer>
-          <CustomButton type="submit">Sign In </CustomButton>
-          <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
-            Sign In With Google
+          <CustomButton type="submit"> Sign in </CustomButton>
+          <CustomButton
+            type="button"
+            onClick={googleSignInStart}
+            isGoogleSignIn
+          >
+            Sign in with Google
           </CustomButton>
         </ButtonsBarContainer>
       </form>
@@ -72,4 +71,10 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+const mapDispatchToProps = (dispatch) => ({
+  googleSignInStart: () => dispatch(googleSignInStart()),
+  emailSignInStart: (email, password) =>
+    dispatch(emailSignInStart({ email, password })),
+});
+
+export default connect(null, mapDispatchToProps)(SignIn);

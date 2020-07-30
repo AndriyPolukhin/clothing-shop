@@ -2,11 +2,11 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 import {
-  BackgroundImageContainer,
   MenuItemContainer,
-  MenuItemContent,
+  BackgroundImageContainer,
+  ContentContainer,
   ContentTitle,
-  ContentSubtitle,
+  ContentSubtitle
 } from './menu-item.styles';
 
 const MenuItem = ({ title, imageUrl, size, history, linkUrl, match }) => (
@@ -15,13 +15,13 @@ const MenuItem = ({ title, imageUrl, size, history, linkUrl, match }) => (
     onClick={() => history.push(`${match.url}${linkUrl}`)}
   >
     <BackgroundImageContainer
-      className="background-image"
+      className='background-image'
       imageUrl={imageUrl}
     />
-    <MenuItemContent>
+    <ContentContainer className='content'>
       <ContentTitle>{title.toUpperCase()}</ContentTitle>
       <ContentSubtitle>SHOP NOW</ContentSubtitle>
-    </MenuItemContent>
+    </ContentContainer>
   </MenuItemContainer>
 );
 

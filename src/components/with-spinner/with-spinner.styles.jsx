@@ -5,7 +5,7 @@ export const SpinnerOverlay = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  align-self: center;
+  align-items: center;
 `;
 
 export const SpinnerContainer = styled.div`
@@ -20,7 +20,7 @@ export const SpinnerContainer = styled.div`
 
   @keyframes spin {
     to {
-      transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
     }
   }
   @-webkit-keyframes spin {

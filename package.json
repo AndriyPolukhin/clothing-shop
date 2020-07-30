@@ -1,6 +1,7 @@
 {
   "name": "clothing-shop",
   "version": "0.1.0",
+  "proxy": "http://localhost:5000",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -18,6 +19,7 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
+    "redux-saga": "1.0.2",
     "reselect": "^4.0.0",
     "styled-components": "^5.1.0"
   },
